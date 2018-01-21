@@ -21,6 +21,7 @@ phantom.create().then(function(ph) {
       }).then(function(ads){
         console.log(ads);
       });
+      page.close();
     });
   });
 });

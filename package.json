@@ -8,7 +8,8 @@
     },
     "dependencies": {
         "phantom": "latest",
-        "respawn": "latest"
+        "respawn": "latest",
+        "express": "latest"
     },
       "license": "MIT"
 }
