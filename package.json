@@ -1,0 +1,15 @@
+{
+    "name": "phantom-respawn",
+    "description": "Respawning phantom services",
+    "version": "0.0.1",
+    "main": "script.js",
+    "scripts": {
+      "start": "node script.js"
+    },
+    "dependencies": {
+        "phantom": "latest",
+        "respawn": "latest"
+    },
+      "license": "MIT"
+}
+    
