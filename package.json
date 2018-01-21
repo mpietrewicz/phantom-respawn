@@ -9,7 +9,9 @@
     "dependencies": {
         "phantom": "latest",
         "respawn": "latest",
-        "express": "latest"
+        "express": "latest",
+        "body-parser": "latest",
+        "multer": "latest"
     },
       "license": "MIT"
 }

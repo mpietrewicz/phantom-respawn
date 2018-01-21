@@ -2,14 +2,23 @@ var phantom = require('phantom');
 const express = require('express')
 const app = express()
 
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer(); // for parsing multipart/form-data
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 phantom.create().then(function(ph) {
 
-    app.get('/', function (req, res) {
+    app.post('/', upload.array(), function (req, res, next) {
+      var startProcessDate = new Date();
+      // console.log(req.body);
+      url = req.body.url;
 
         ph.createPage().then(function(page) {
-            var url = "https://allegro.pl/kategoria/seria-3-e46-1998-2007-18077?order=dd&pojemnosc-silnika-cm3-od=2700&pojemnosc-silnika-cm3-do=2900&nadwozie=Sedan#time=20180114175200";
-            page.open(url).then(function(status) {
-              console.log(status);
+            page.open(req.body.url).then(function(status) {
+              // console.log(status);
         
               page.injectJs("jquery.min.js");
               page.evaluate(function() {
@@ -24,14 +33,16 @@ phantom.create().then(function(ph) {
                 });
                 return ads;
               }).then(function(ads){
-                console.log(ads);
-                res.send(ads)
+                // console.log(ads);
+                console.log("Evaluate page: " +url +"\n[" +(new Date() - startProcessDate) +" ms]");
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify({ content: ads }));
               });
               page.close();
             });
           });
     })
 
-    app.listen(3000, () => console.log('Example app listening on port 3000!'))
+    app.listen(60000, () => console.log('Example app listening on port 60000!'))
 
 });
