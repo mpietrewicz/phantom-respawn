@@ -9,9 +9,12 @@ var upload = multer(); // for parsing multipart/form-data
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-phantom.create().then(function(ph) {
+
 
     app.post('/', upload.array(), function (req, res, next) {
+      // ph start
+      phantom.create().then(function(ph) {
+
       var startProcessDate = new Date();
       // console.log(req.body);
       url = req.body.url;
@@ -41,8 +44,9 @@ phantom.create().then(function(ph) {
               page.close();
             });
           });
+
+          // ph esit
+          });
     })
 
-    app.listen(60000, () => console.log('Example app listening on port 60000!'))
-
-});
+    app.listen(60000, () => console.log('Example app listening on port 60000!'));
