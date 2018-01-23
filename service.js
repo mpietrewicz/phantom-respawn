@@ -46,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
           });
 
           // ph esit
+          phantom.exit();
           });
     })
 
